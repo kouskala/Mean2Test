@@ -1,0 +1,23 @@
+<div class="conges">
+    <div aria-flowto="<left></left>">
+        <h2>Conges list</h2>
+        <button class="addBtn" md-fab [routerLink]="['/conges/new']"> <md-icon>add</md-icon></button>
+        <br>
+    </div>
+    <md-input-container>
+        <input mdInput type="search" [(ngModel)]='listCongesFilter' [formControl]="congesControl" placeholder="search...">
+    </md-input-container>
+    <md-card *ngFor="let conge of conges | async | congesFilter:listCongesFilter">
+        <md-list>
+            <md-list-item>
+                <a md-line [routerLink]="['/conges/conges-detail', conge.id]"> {{conge.title}} </a>
+                <p md-line>
+                    <span>{{conge.dateDeb}}</span>
+                    <span>{{conge.dateFin}}</span>
+                </p>
+                <span><button md-button (click)='deleteConges(conge.id)'><md-icon>delete</md-icon></button></span>
+                <span><button md-button [routerLink]="['/conges/edit', conge.id]"><md-icon>edit</md-icon></button></span>
+            </md-list-item>
+        </md-list>
+    </md-card>
+</div>
